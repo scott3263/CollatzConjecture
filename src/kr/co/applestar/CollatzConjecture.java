@@ -1,48 +1,45 @@
 package kr.co.applestar;
 
-import java.util.Date;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.text.SimpleDateFormat;
 
-
+import kr.co.applestar.dbconnection.DBConnection;
 
 public class CollatzConjecture {
 
 	private static Logger logger =Logger.getLogger(CollatzConjecture.class.getName());
+	private static DBConnection conn = new DBConnection();
 	
 	public static void main(String[] args) {
-		
-		Solution s = new Solution();
-		
-		logger.setUseParentHandlers(false);
-		
-		Handler handler = new ConsoleHandler();
-		handler.setFormatter(new MyLogFormatter());
-		logger.addHandler(handler);
-		
 		logger.info("Collatz Conjecture Start!");
 		
-		double curNum = 1;
+		// 현재 DB의 max값을 가져온다
+		double startVal;
+		startVal =  conn.getCurrentMaxNumber();
+		logger.info("현재 DB의 최대값 startVal : " + startVal);
 		
 		CollatzNumber cn = new CollatzNumber();
 		
-		logger.info("���۹�ȣ : " + curNum);
-		while (curNum < 50000) {
-			cn.setMyNumber(curNum);
-			cn.setMaxNumber(0);
-			cn.setCnt(0);
-			cn.calc();
-			logger.info("currNum:" + curNum + ",  count:" + cn.getCnt() + " Times,  MaxNum:" + cn.getMaxNumber());
-			curNum++;
-
+		//logger.info("���۹�ȣ : " + curNum);
+		while (startVal < 500) {
+			logger.info("startVal : "  + startVal);
+			try {
+				if (cn.calc(startVal)) {
+					logger.info("startVal:" + startVal + ", bounce : " + cn.getBounce() + "  count:" + cn.getCalcCnt() + " Times,  MaxNum:" + cn.getMaxNumber());
+					startVal++;	
+				} else {
+					logger.info("cn.calc returns fail!");
+				}	
+			} catch (Exception e) {
+				logger.info("e.Message : " + e.getMessage());
+			}
+			
+			startVal++;
+			
 		} 
 	
 	}
 	
+	/*
 	public static class MyLogFormatter extends Formatter {
 
         @Override
@@ -60,6 +57,7 @@ public class CollatzConjecture {
             return sb.toString();
         }
     }
+    */
 }
 
 
