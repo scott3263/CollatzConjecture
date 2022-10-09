@@ -4,7 +4,7 @@ public class CollatzNumber {
 	private double myNumber;
 	private double maxNumber;
 	private long bounce;
-	private int calcCnt;
+	//private int calcCnt;
 	
 	public long getBounce() {
 		return bounce;
@@ -12,12 +12,15 @@ public class CollatzNumber {
 	public void setBounce(long bounce) {
 		this.bounce = bounce;
 	}
+	
+	/*
 	public int getCalcCnt() {
 		return calcCnt;
 	}
 	public void setCalcCnt(int calcCnt) {
 		this.calcCnt = calcCnt;
 	}
+	*/
 	public double getMyNumber() {
 		return myNumber;
 	}
@@ -35,13 +38,13 @@ public class CollatzNumber {
 		
 		myNumber = myNum;
 		bounce = 0 ;
-		calcCnt = 0;
-		System.out.println("calc myNumber : " + myNumber);
+		maxNumber = 0 ;
+		//calcCnt = 0;
+		//System.out.println("calc myNumber : " + myNumber);
 		
 		try {
 			while(myNumber != 1) {
-				System.out.println("   myNumber = " + myNumber);
-				
+				//System.out.println("   myNumber = " + myNumber);
 				
 				if (myNumber % 2 == 0) {
 					myNumber = myNumber / 2;
@@ -52,9 +55,9 @@ public class CollatzNumber {
 				if (maxNumber < myNumber) {
 					maxNumber = myNumber;
 				}
-				calcCnt++;
+				//calcCnt++;
 				bounce++;				
-				break;
+				//break;
 			}	
 		} catch (Exception e) {
 			System.out.println("e.getMessage() : " + e.getMessage());

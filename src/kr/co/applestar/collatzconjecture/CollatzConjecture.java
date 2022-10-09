@@ -3,6 +3,7 @@ package kr.co.applestar.collatzconjecture;
 import java.util.logging.Logger;
 
 import kr.co.applestar.dbconnection.DBConnection;
+import kr.co.applestar.hash.sha256;
 
 public class CollatzConjecture {
 
@@ -14,27 +15,35 @@ public class CollatzConjecture {
 		
 		// 현재 DB의 max값을 가져온다
 		double startVal;
-		startVal =  conn.getCurrentMaxNumber();
-		logger.info("현재 DB의 최대값 startVal : " + startVal);
-		
 		CollatzNumber cn = new CollatzNumber();
 		
+		startVal =  conn.getCurrentMaxNumber() + 1;
+		logger.info("현재 DB의 최대값 startVal : " + startVal);
+		
 		//logger.info("���۹�ȣ : " + curNum);
-		while (startVal < 500) {
-			logger.info("startVal : "  + startVal);
+		while (true) {
+			//logger.info("startVal : "  + startVal);
 			try {
 				if (cn.calc(startVal)) {
-					logger.info("startVal:" + startVal + ", bounce : " + cn.getBounce() + "  count:" + cn.getCalcCnt() + " Times,  MaxNum:" + cn.getMaxNumber());
-					//startVal++;	
+					//logger.info("startVal :" + startVal + ", bounce : " + cn.getBounce() + " Times,  MaxNum :" + cn.getMaxNumber());
+					
+					//hash값 얻기
+					String encryptSHA = sha256.SHA256(Double.toString(startVal));
+					
+					// DB insert
+					if (conn.insertNumber(startVal, cn.getBounce(), cn.getMaxNumber(), encryptSHA)) {
+						//logger.info("Insert Success");
+					}else {
+						logger.info("Insert Fail");
+					}
+					
 				} else {
 					logger.info("cn.calc returns fail!");
 				}	
 			} catch (Exception e) {
 				logger.info("e.Message : " + e.getMessage());
 			}
-			
 			startVal++;
-			
 		} 
 	
 	}

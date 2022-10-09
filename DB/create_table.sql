@@ -1,15 +1,14 @@
 drop table `Collatz_Conjecture`; 
 
 CREATE TABLE `Collatz_Conjecture` (
-  `seq` double NOT NULL AUTO_INCREMENT COMMENT '¼ø¹ø',
-  `bounce` long NOT NULL COMMENT '¿¬»êÈ½¼ö',
-  `calc_times` integer NOT NULL COMMENT '¼Ò¿ä½Ã°£',
-  `max_num` double NOT NULL COMMENT 'ÃÖ´ë°ª',
-  `hash_value` varchar(200) NOT NULL COMMENT 'ÇØ½Ã°ª',
-  `reg_date` datetime DEFAULT current_timestamp() COMMENT 'µî·ÏÀÏ½Ã',
-  `reg_id` varchar(45) DEFAULT NULL COMMENT 'µî·ÏÀÚ',
-  `last_date` datetime DEFAULT current_timestamp() COMMENT 'ÃÖÁ¾¼öÁ¤ÀÏ½Ã',
-  `last_id` varchar(45) DEFAULT NULL COMMENT 'ÃÖÁ¾¼öÁ¤ÀÚ',
+  `seq` double NOT NULL AUTO_INCREMENT COMMENT 'ìˆœë²ˆ',
+  `bounce` long NOT NULL COMMENT 'ì—°ì‚°íšŸìˆ˜',
+  `max_num` double NOT NULL COMMENT 'ìµœëŒ€ê°’',
+  `hash_value` varchar(200) NOT NULL COMMENT 'í•´ì‹œê°’',
+  `reg_date` datetime DEFAULT current_timestamp() COMMENT 'ë“±ë¡ì¼ì‹œ',
+  `reg_id` varchar(45) DEFAULT NULL COMMENT 'ë“±ë¡ì',
+  `last_date` datetime DEFAULT current_timestamp() COMMENT 'ìµœì¢…ìˆ˜ì •ì¼ì‹œ',
+  `last_id` varchar(45) DEFAULT NULL COMMENT 'ìµœì¢…ìˆ˜ì •ì',
   PRIMARY KEY (`seq`),
   UNIQUE KEY `collatz_conjecture_UNIQUE_01`(`hash_value`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Collatz Conjecture';

@@ -39,22 +39,24 @@ public class DBConnection {
 		}
 	}
 	
-	public boolean insertNumber(double d, int term, String hashVal, int duration) {
+	public boolean insertNumber(double d, long bounce, double m, String hashVal) {
 		
 		try {
-			String sql = "insert into prime_numbers(prime_num, int_num, hash_value, calc_duration) values (?,?,?,?)";
+			String sql = "insert into applestar.Collatz_Conjecture(seq, bounce, max_num, hash_value) values (?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setDouble(1, d);
-			pstmt.setInt(2, term);
-			pstmt.setString(3, hashVal);
-			pstmt.setInt(4, duration);
+			pstmt.setLong(2, bounce);
+			pstmt.setDouble(3, m);
+			pstmt.setString(4, hashVal);
 			
 			int cnt = pstmt.executeUpdate();
 			
+			//System.out.println("   cnt : " + cnt);
+			
 			if (cnt == 0) {
 				//System.out.println("Insert Fail");
-				
+				return false;
 			} else {
 				return true ;
 			}
@@ -68,14 +70,14 @@ public class DBConnection {
 	public double getCurrentMaxNumber() {
 		
 		try {
-			String sql = "SELECT max(seq) FROM applestar.CollazConjecture";
+			String sql = "SELECT max(seq) FROM applestar.Collatz_Conjecture";
 			rs = st.executeQuery(sql);
 			
 			if (rs.next()) {
 				logger.info("getCurrentMaxPrimeNumber() : " + rs.getDouble(1));
 				
 				if (rs.getDouble(1) < 1) {
-					return 1;
+					return 0;
 				} else {
 					return rs.getDouble(1);	
 				}
@@ -86,26 +88,7 @@ public class DBConnection {
 			logger.info("getCurrentMaxNumber() : " + e.getMessage());
 			
 		}
-		return 1;
+		return 0;
 	}
 	
-	public double getMinNumberBiggerThenInput(double d) {
-		try {
-			String sql = "SELECT min(prime_num) FROM applestar.prime_numbers where prime_num > ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setDouble(1, d);
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) {
-				//logger.info("[" + d + "]보다 크면서 제일 작은 소수는 [" + rs.getDouble(1) + "]");
-				return rs.getDouble(1);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return 2;
-	}
-	
-	
-
 }
