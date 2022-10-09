@@ -1,4 +1,4 @@
-package kr.co.applestar;
+package kr.co.applestar.collatzconjecture;
 
 public class Solution {
 	

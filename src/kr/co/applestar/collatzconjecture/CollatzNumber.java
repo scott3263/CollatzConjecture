@@ -1,4 +1,4 @@
-package kr.co.applestar;
+package kr.co.applestar.collatzconjecture;
 
 public class CollatzNumber {
 	private double myNumber;
@@ -32,25 +32,33 @@ public class CollatzNumber {
 	}
 	
 	public boolean calc(double myNum) {
-		System.out.println("calc myNum : " + myNum);
-		this.myNumber = myNum;
+		
+		myNumber = myNum;
+		bounce = 0 ;
+		calcCnt = 0;
+		System.out.println("calc myNumber : " + myNumber);
 		
 		try {
-			while(this.myNumber != 1) {
-				//System.out.println("   d = " + d);
-				if (this.myNumber % 2 == 0) {
-					this.myNumber = this.myNumber / 2;
+			while(myNumber != 1) {
+				System.out.println("   myNumber = " + myNumber);
+				
+				
+				if (myNumber % 2 == 0) {
+					myNumber = myNumber / 2;
 				} else {
-					this.myNumber = (this.myNumber * 3 ) + 1;
+					myNumber = (myNumber * 3 ) + 1;
 				}
 				
-				if (this.maxNumber < this.myNumber) {
-					this.maxNumber = this.myNumber;
+				if (maxNumber < myNumber) {
+					maxNumber = myNumber;
 				}
-				this.calcCnt++;
+				calcCnt++;
+				bounce++;				
+				break;
 			}	
 		} catch (Exception e) {
 			System.out.println("e.getMessage() : " + e.getMessage());
+			return false;
 		}
 		
 		

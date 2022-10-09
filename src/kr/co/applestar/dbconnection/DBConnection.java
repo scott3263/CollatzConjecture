@@ -72,7 +72,7 @@ public class DBConnection {
 			rs = st.executeQuery(sql);
 			
 			if (rs.next()) {
-				//logger.info("getCurrentMaxPrimeNumber() : " + rs.getDouble(1));
+				logger.info("getCurrentMaxPrimeNumber() : " + rs.getDouble(1));
 				
 				if (rs.getDouble(1) < 1) {
 					return 1;
@@ -83,8 +83,10 @@ public class DBConnection {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			logger.info("getCurrentMaxNumber() : " + e.getMessage());
+			
 		}
-		return 0;
+		return 1;
 	}
 	
 	public double getMinNumberBiggerThenInput(double d) {

@@ -1,4 +1,4 @@
-package kr.co.applestar;
+package kr.co.applestar.collatzconjecture;
 
 import java.util.logging.Logger;
 
@@ -25,7 +25,7 @@ public class CollatzConjecture {
 			try {
 				if (cn.calc(startVal)) {
 					logger.info("startVal:" + startVal + ", bounce : " + cn.getBounce() + "  count:" + cn.getCalcCnt() + " Times,  MaxNum:" + cn.getMaxNumber());
-					startVal++;	
+					//startVal++;	
 				} else {
 					logger.info("cn.calc returns fail!");
 				}	
