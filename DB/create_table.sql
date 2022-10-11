@@ -18,7 +18,15 @@ select * from Collatz_Conjecture;
 
 select * from Collatz_Conjecture order by reg_date desc;
 
-select max(seq) , max(bounce), max(max_num), max(reg_date) from Collatz_Conjecture;
+select max(seq) from Collatz_Conjecture;
+
+select max(bounce) from Collatz_Conjecture;
+
+select max(max_num) from Collatz_Conjecture;
+
+select max(reg_date) from Collatz_Conjecture;
+
+select max(seq), max(bounce), max(max_num), max(reg_date) from Collatz_Conjecture;
 
 select * from Collatz_Conjecture where max_num = 1504774;
 
