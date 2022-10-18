@@ -17,11 +17,12 @@ CREATE INDEX `collatz_conjecture_idx_01` ON `Collatz_Conjecture` (`bounce`);
 CREATE INDEX `collatz_conjecture_idx_02` ON `Collatz_Conjecture` (`max_num`);
 CREATE INDEX `collatz_conjecture_idx_03` ON `Collatz_Conjecture` (`reg_date`);
 
-select * from Collatz_Conjecture order by reg_date desc;
-
 select format(max(seq),"#,##0"), 
 	   format(max(bounce),"#,##0"),
        format(max(max_num),"#,##0"),
        max(reg_date)
 from Collatz_Conjecture;
 
+select * from Collatz_Conjecture order by reg_date desc;
+select * from Collatz_Conjecture where bounce = 612;
+select * from Collatz_Conjecture where max_num = 2412493616608;
