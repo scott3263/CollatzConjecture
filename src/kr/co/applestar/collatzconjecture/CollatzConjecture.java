@@ -2,6 +2,8 @@ package kr.co.applestar.collatzconjecture;
 
 import java.util.logging.Logger;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
+
 import kr.co.applestar.dbconnection.DBConnection;
 import kr.co.applestar.hash.sha256;
 
@@ -13,21 +15,21 @@ public class CollatzConjecture {
 	public static void main(String[] args) {
 		logger.info("Collatz Conjecture Start!");
 		
-		// 현재 DB의 max값을 가져온다
+		// �쁽�옱 DB�쓽 max媛믪쓣 媛��졇�삩�떎
 		double startVal;
 		CollatzNumber cn = new CollatzNumber();
 		
 		startVal =  conn.getCurrentMaxNumber() + 1;
-		logger.info("현재 DB의 최대값 startVal : " + startVal);
+		logger.info("�쁽�옱 DB�쓽 理쒕�媛� startVal : " + startVal);
 		
-		//logger.info("���۹�ȣ : " + curNum);
+		//logger.info("占쏙옙占쌜뱄옙호 : " + curNum);
 		while (true) {
 			//logger.info("startVal : "  + startVal);
 			try {
 				if (cn.calc(startVal)) {
 					//logger.info("startVal :" + startVal + ", bounce : " + cn.getBounce() + " Times,  MaxNum :" + cn.getMaxNumber());
 					
-					//hash값 얻기
+					//hash媛� �뼸湲�
 					String encryptSHA = sha256.SHA256(Double.toString(startVal));
 					
 					// DB insert
