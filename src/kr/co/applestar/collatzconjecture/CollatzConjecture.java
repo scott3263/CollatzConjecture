@@ -30,7 +30,7 @@ public class CollatzConjecture {
 					//logger.info("startVal :" + startVal + ", bounce : " + cn.getBounce() + " Times,  MaxNum :" + cn.getMaxNumber());
 					
 					//hash媛� �뼸湲�
-					String encryptSHA = sha256.SHA256(Double.toString(startVal));
+					java.lang.String encryptSHA = sha256.SHA256(Double.toString(startVal));
 					
 					// DB insert
 					if (conn.insertNumber(startVal, cn.getBounce(), cn.getMaxNumber(), encryptSHA)) {
